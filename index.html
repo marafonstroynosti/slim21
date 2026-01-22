@@ -1,843 +1,760 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slim21 - Марафон похудения</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --pink-color: #ff6b98;
-            --green-color: #4CD964;
-            --dark-color: #333333;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--dark-color);
-        }
-        
-        .pink-text {
-            color: var(--pink-color);
-        }
-        
-        .green-text {
-            color: var(--green-color);
-        }
-        
-        .pink-bg {
-            background-color: var(--pink-color);
-        }
-        
-        .green-bg {
-            background-color: var(--green-color);
-        }
-        
-        .cta-button {
-            background-color: var(--pink-color);
-            padding: 12px 28px;
-            border-radius: 30px;
-            color: white;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 15px rgba(255, 107, 152, 0.4);
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--pink-color);
-            transition: width 0.3s;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .stat-box {
-            background-color: #f8f8f8;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        
-        .stat-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        .feature-card {
-            border-radius: 10px;
-            padding: 30px 20px;
-            text-align: center;
-            background-color: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        
-        .price-card {
-            border-radius: 15px;
-            padding: 30px;
-            background-color: white;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .price-card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
-        
-        .price-card.recommended {
-            border: 2px solid var(--green-color);
-            position: relative;
-        }
-        
-        .price-tag {
-            font-size: 28px;
-            font-weight: 700;
-            margin: 15px 0;
-        }
-        
-        .recommended-badge {
-            position: absolute;
-            top: -12px;
-            right: 20px;
-            background-color: var(--green-color);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-        
-        .testimonial-card {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-        }
-        
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-        
-        .faq-item {
-            border-bottom: 1px solid #eee;
-            padding: 20px 0;
-        }
-        
-        .faq-question {
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .faq-answer {
-            margin-top: 15px;
-            display: none;
-        }
-        
-        .faq-answer.active {
-            display: block;
-        }
-        
-        .section {
-            padding: 80px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            font-weight: 700;
-            font-size: 36px;
-        }
-        
-        .btn-telegram {
-            background-color: #0088cc;
-            color: white;
-            transition: all 0.3s;
-        }
-        
-        .btn-telegram:hover {
-            background-color: #006699;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 136, 204, 0.3);
-        }
-        
-        .before-after-container {
-            display: flex;
-            position: relative;
-        }
-        
-        .before-after-label {
-            position: absolute;
-            font-weight: 600;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-        
-        .before-label {
-            top: 20px;
-            left: 20px;
-            background-color: rgba(255, 107, 152, 0.8);
-            color: white;
-        }
-        
-        .after-label {
-            bottom: 20px;
-            right: 20px;
-            background-color: rgba(76, 217, 100, 0.8);
-            color: white;
-        }
-        
-        @media (max-width: 768px) {
-            .section {
-                padding: 50px 0;
-            }
-            
-            .section-title {
-                font-size: 28px;
-                margin-bottom: 30px;
-            }
-            
-            .mobile-menu {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: white;
-                z-index: 100;
-                padding: 30px;
-                transform: translateX(100%);
-                transition: transform 0.3s ease-in-out;
-            }
-            
-            .mobile-menu.active {
-                transform: translateX(0);
-            }
-            
-            .close-menu {
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                font-size: 24px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Slim21 - Марафон похудения</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --pink-color:#ff6b98;
+      --green-color:#4CD964;
+      --dark-color:#333333;
+      --pay-url: "https://payform.ru/k88rFUM/";
+      --sticky-cta-h: 76px;
+    }
+
+    body{
+      font-family:'Montserrat',sans-serif;
+      color:var(--dark-color);
+      overflow-x:hidden;
+      /* место под нижнюю sticky кнопку, чтобы контент не прятался */
+      padding-bottom: calc(var(--sticky-cta-h) + env(safe-area-inset-bottom));
+    }
+
+    a, button { -webkit-tap-highlight-color: transparent; }
+
+    .pink-text{color:var(--pink-color);}
+    .green-text{color:var(--green-color);}
+
+    .cta-button{
+      background-color:var(--pink-color);
+      padding:12px 22px;
+      border-radius:9999px;
+      color:#fff;
+      font-weight:700;
+      transition:all .2s;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      width:auto;
+      white-space:nowrap;
+    }
+    .cta-button:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(255,107,152,.35);}
+
+    .nav-link{position:relative;}
+    .nav-link::after{
+      content:'';
+      position:absolute;
+      bottom:-5px;left:0;
+      width:0;height:2px;
+      background-color:var(--pink-color);
+      transition:width .2s;
+    }
+    .nav-link:hover::after{width:100%;}
+
+    .stat-box{
+      background:#f8f8f8;
+      border-radius:12px;
+      padding:18px 14px;
+      text-align:center;
+      transition:all .2s;
+      min-width:132px;
+    }
+
+    .feature-card{
+      border-radius:14px;
+      padding:26px 18px;
+      text-align:center;
+      background:#fff;
+      box-shadow:0 6px 18px rgba(0,0,0,.06);
+      transition:all .2s;
+      height:100%;
+    }
+
+    .price-card{
+      border-radius:16px;
+      padding:26px 20px;
+      background:#fff;
+      box-shadow:0 8px 24px rgba(0,0,0,.08);
+      transition:all .2s;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      min-width:0;
+    }
+    .price-card.recommended{border:2px solid var(--green-color);position:relative;}
+    .recommended-badge{
+      position:absolute;
+      top:12px;right:12px;
+      background:var(--green-color);
+      color:#fff;
+      padding:6px 12px;
+      border-radius:9999px;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .price-tag{font-size:28px;font-weight:800;margin:12px 0;}
+
+    .testimonial-card{
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 8px 24px rgba(0,0,0,.08);
+      transition:all .2s;
+      background:#fff;
+      height:100%;
+    }
+
+    .faq-item{border-bottom:1px solid #eee;padding:18px 0;}
+    .faq-question{font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+    .faq-answer{margin-top:12px;display:none;color:#4b5563;}
+    .faq-answer.active{display:block;}
+
+    .section{padding:72px 0;}
+    .section-title{text-align:center;margin-bottom:46px;font-weight:800;font-size:34px;line-height:1.1;}
+
+    /* Mobile menu */
+    .mobile-menu{
+      position:fixed;
+      top:0;left:0;right:0;bottom:0;
+      background:#fff;
+      z-index:100;
+      padding:22px;
+      transform:translateX(100%);
+      transition:transform .25s ease-in-out;
+      overflow:auto;
+    }
+    .mobile-menu.active{transform:translateX(0);}
+    .close-menu{position:absolute;top:16px;right:16px;font-size:24px;}
+
+    /* Sticky bottom CTA */
+    .sticky-cta{
+      position:fixed;
+      left:0;right:0;
+      bottom:0;
+      z-index:60;
+      padding:12px 12px calc(12px + env(safe-area-inset-bottom));
+      background:rgba(255,255,255,.92);
+      backdrop-filter:saturate(180%) blur(10px);
+      border-top:1px solid rgba(0,0,0,.08);
+    }
+    .sticky-cta .btn{
+      width:100%;
+      background:var(--pink-color);
+      color:#fff;
+      border-radius:9999px;
+      padding:14px 16px;
+      font-weight:900;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      box-shadow:0 10px 24px rgba(255,107,152,.35);
+    }
+    .sticky-cta .btn:active{transform:translateY(1px);}
+
+    /* Better mobile layout */
+    @media (max-width: 768px){
+      .section{padding:52px 0;}
+      .section-title{font-size:26px;margin-bottom:28px;padding:0 8px;}
+      .cta-button{width:100%;white-space:normal;line-height:1.2;padding:14px 18px;}
+      .stat-box{flex:1;min-width:0;width:auto;}
+    }
+
+    /* Prevent any overflow from long text */
+    .wrap-anywhere{overflow-wrap:anywhere;word-break:break-word;}
+  </style>
 </head>
+
 <body>
-    <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold">
-                <span class="pink-text">Slim</span><span class="green-text">21</span>
-            </a>
-            
-            <nav class="hidden md:flex space-x-8">
-                <a href="#main" class="nav-link font-medium">Главная</a>
-                <a href="#program" class="nav-link font-medium">О программе</a>
-                <a href="#pricing" class="nav-link font-medium">Тарифы</a>
-                <a href="#register" class="nav-link font-medium">Запись на марафон</a>
-            </nav>
-            
-            <a href="https://t.me/manager_alexsandra?text=Здравствуйте!%20Меня%20интересует%20участие%20в%20марафоне%20стройности." class="hidden md:inline-block cta-button">
-                <i class="fab fa-telegram-plane mr-2"></i>Связаться
-            </a>
-            
-            <button class="md:hidden text-xl" id="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div class="mobile-menu md:hidden" id="mobile-menu">
-            <button class="close-menu" id="close-menu">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="flex flex-col space-y-6 mt-12">
-                <a href="#main" class="text-xl font-medium">Главная</a>
-                <a href="#program" class="text-xl font-medium">О программе</a>
-                <a href="#pricing" class="text-xl font-medium">Тарифы</a>
-                <a href="#register" class="text-xl font-medium">Запись на марафон</a>
-                <a href="https://t.me/manager_alexsandra?text=Здравствуйте!%20Меня%20интересует%20участие%20в%20марафоне%20стройности." class="cta-button text-center mt-4">
-                    <i class="fab fa-telegram-plane mr-2"></i>Связаться
-                </a>
-            </div>
-        </div>
-    </header>
+  <script>
+    // Единый URL оплаты
+    const PAY_URL = "https://payform.ru/k88rFUM/";
+  </script>
 
-    <!-- Hero Section -->
-    <section id="main" class="pt-32 pb-20">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-6">
-                        Похудей до <span class="pink-text">–10 кг</span> за 21 день — <span class="green-text">без диет</span>, срывов и изнурительных тренировок
-                    </h1>
-                    <p class="text-lg text-gray-600 mb-8">
-                        Сбалансированная система питания, поддержка, чат и проверенная программа
-                    </p>
-                    
-                    <div class="flex flex-wrap gap-6 mb-10">
-                        <div class="stat-box w-32">
-                            <div class="pink-text text-3xl font-bold">20K+</div>
-                            <div class="text-sm text-gray-500">довольных клиентов</div>
-                        </div>
-                        <div class="stat-box w-32">
-                            <div class="green-text text-3xl font-bold">97%</div>
-                            <div class="text-sm text-gray-500">сохраняют результат</div>
-                        </div>
-                    </div>
-                    
-                    <a href="https://t.me/manager_alexsandra?text=Здравствуйте!%20Меня%20интересует%20участие%20в%20марафоне%20стройности." class="cta-button inline-block">
-                        Записаться на марафон
-                    </a>
-                </div>
-                
-                <div class="md:w-1/2">
-                    <div class="rounded-lg overflow-hidden shadow-xl">
-                        <img src="https://page.gensparksite.com/v1/base64_upload/a52c1234f5f8a39f4562b47f08ac1c25" alt="До и После" class="w-full">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <!-- Логотип -> оплата -->
+      <a href="https://payform.ru/k88rFUM/" class="text-2xl font-bold">
+        <span class="pink-text">Slim</span><span class="green-text">21</span>
+      </a>
 
-    <!-- Program Section -->
-    <section id="program" class="section bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="section-title">О программе</h2>
-            
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <p class="text-lg mb-6">
-                        Программа для женщин любого возраста, без жёстких ограничений. Тренировки под уровень, питание — по доступным продуктам. Всё онлайн, поддержка каждый день.
-                    </p>
-                    
-                    <div class="bg-white rounded-lg p-6 shadow-md">
-                        <h3 class="text-xl font-semibold mb-4">Подходит вам, если...</h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <span class="green-text text-xl mr-3">✓</span>
-                                <div>
-                                    <strong>Вес стоит или растёт</strong>
-                                    <p class="text-gray-600">Диеты не работают, а вес не уходит или продолжает расти</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="green-text text-xl mr-3">✓</span>
-                                <div>
-                                    <strong>Часто срываетесь</strong>
-                                    <p class="text-gray-600">Начинаете с энтузиазмом, но быстро теряете мотивацию</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="green-text text-xl mr-3">✓</span>
-                                <div>
-                                    <strong>Нет сил и энергии</strong>
-                                    <p class="text-gray-600">Постоянная усталость, нет энергии на активную жизнь</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="green-text text-xl mr-3">✓</span>
-                                <div>
-                                    <strong>Нужно сопровождение</strong>
-                                    <p class="text-gray-600">Понимаете, что с поддержкой результат будет лучше</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <a href="https://t.me/manager_alexsandra?text=Здравствуйте!%20Меня%20интересует%20участие%20в%20марафоне%20стройности." class="cta-button inline-block mt-8">
-                        Готова начать? Записаться →
-                    </a>
-                </div>
-                
-                <div class="md:w-5/12">
-                    <div class="rounded-lg overflow-hidden shadow-xl">
-                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Здоровая пища" class="w-full">
-                    </div>
-                    
-                    <div class="flex justify-between mt-8">
-                        <div class="text-center">
-                            <div class="green-text text-3xl font-bold">97%</div>
-                            <div class="text-sm">сохраняют результат</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="pink-text text-3xl font-bold">21</div>
-                            <div class="text-sm">день программы</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="green-text text-3xl font-bold">24/7</div>
-                            <div class="text-sm">поддержка</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <!-- Меню (якоря оставляем, чтобы работал скролл) -->
+      <nav class="hidden md:flex space-x-8">
+        <a href="#main" class="nav-link font-medium">Главная</a>
+        <a href="#program" class="nav-link font-medium">О программе</a>
+        <a href="#pricing" class="nav-link font-medium">Тарифы</a>
+        <a href="#register" class="nav-link font-medium">Запись</a>
+      </nav>
 
-    <!-- Features Section -->
-    <section id="features" class="section">
-        <div class="container mx-auto px-4">
-            <h2 class="section-title">Что входит в марафон</h2>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="feature-card">
-                    <div class="text-4xl pink-text mb-4">💬</div>
-                    <h3 class="text-xl font-semibold mb-2">Меню по дням</h3>
-                    <p class="text-gray-600">Детальное расписание питания на каждый день марафона</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="text-4xl pink-text mb-4">🥗</div>
-                    <h3 class="text-xl font-semibold mb-2">Вкусные и доступные рецепты</h3>
-                    <p class="text-gray-600">Простые в приготовлении блюда из доступных продуктов</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="text-4xl pink-text mb-4">🏋️‍♀️</div>
-                    <h3 class="text-xl font-semibold mb-2">Лёгкие тренировки дома</h3>
-                    <p class="text-gray-600">Адаптированные под любой уровень подготовки занятия</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="text-4xl pink-text mb-4">👩‍💻</div>
-                    <h3 class="text-xl font-semibold mb-2">Поддержка куратора</h3>
-                    <p class="text-gray-600">Персональное сопровождение на протяжении всего марафона</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="text-4xl pink-text mb-4">🧠</div>
-                    <h3 class="text-xl font-semibold mb-2">Мотивация, разборы ошибок</h3>
-                    <p class="text-gray-600">Работа с психологическими аспектами пищевого поведения</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="text-4xl pink-text mb-4">📸</div>
-                    <h3 class="text-xl font-semibold mb-2">Фотоотчёты, чат с участницами</h3>
-                    <p class="text-gray-600">Общение и взаимная поддержка участниц марафона</p>
-                </div>
-            </div>
-        </div>
-    </section>
+      <!-- CTA -> оплата -->
+      <a href="https://payform.ru/k88rFUM/" class="hidden md:inline-flex cta-button">
+        <i class="fas fa-credit-card"></i>Хочу с вами
+      </a>
 
-    <!-- Results Section -->
-    <section id="results" class="section bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="section-title">Результаты участниц</h2>
-            
-            <div class="grid md:grid-cols-3 gap-8 mb-12">
-                <div class="testimonial-card bg-white">
-                    <img src="https://page.gensparksite.com/v1/base64_upload/34103183d460b113251e3efc6ca4dd93" alt="Результат Марии" class="w-full">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold">Мария, 42 лет</h3>
-                        <div class="pink-text font-bold mb-2">Минус 12 кг</div>
-                        <p class="text-gray-600">"Я не верила, что можно похудеть без голода и срывов! Сейчас чувствую себя совершенно другим человеком."</p>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card bg-white">
-                    <img src="https://page.gensparksite.com/v1/base64_upload/7ba98fd939ca2f89bc8a731e29de375e" alt="Результат Натальи" class="w-full">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold">Наталья, 45 лет</h3>
-                        <div class="pink-text font-bold mb-2">Минус 15 кг</div>
-                        <p class="text-gray-600">"Программа помогла не только похудеть, но и изменить отношение к питанию. Результат держится уже 6 месяцев!"</p>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card bg-white">
-                    <img src="https://page.gensparksite.com/v1/base64_upload/4a8bea8a48ac546a9d5d9ff2c7a9890c" alt="Результат Екатерины" class="w-full">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold">Екатерина, 35 года</h3>
-                        <div class="pink-text font-bold mb-2">Минус 8 кг</div>
-                        <p class="text-gray-600">"Никогда не думала, что в моем возрасте можно так легко похудеть. Спасибо за поддержку и отличную программу!"</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center">
-                <div class="text-xl mb-6">С нами уже похудели более 20 000 женщин</div>
-                <a href="https://t.me/manager_alexsandra?text=Здравствуйте!%20Меня%20интересует%20участие%20в%20марафоне%20стройности." class="cta-button">
-                    Хочу такие же результаты
-                </a>
-            </div>
-        </div>
-    </section>
+      <button class="md:hidden text-xl" id="menu-toggle" type="button" aria-label="Открыть меню">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="section">
-        <div class="container mx-auto px-4">
-            <h2 class="section-title">Пакеты участия и цены</h2>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="price-card">
-                    <h3 class="text-xl font-semibold">Пробный марафон</h3>
-                    <div class="text-sm text-gray-500">(10 дней)</div>
-                    <div class="price-tag">300 ₽</div>
-                    <div class="text-gray-500 mb-6">6 € / $7</div>
-                    <ul class="space-y-2 flex-grow">
-                        <li class="flex items-center">
-                            <span class="green-text mr-2">✓</span>
-                            Пример меню
-                        </li>
-                        <li class="flex items-center">
-                            <span class="green-text mr-2">✓</span>
-                            Поддержка
-                        </li>
-                        <li class="flex items-center">
-                            <span class="green-text mr-2">✓</span>
-                            Чат
-                        </li>
-                    </ul>
-                    <a href="https://t.me/manager_alexsandra?text=Здравствуйте!%20Меня%20интересует%20тариф%20Пробный%20марафон." class="cta-button inline-block mt-6 text-center w-full">
-                        Выбрать
-                    </a>
-                </div>
-                
-                <div class="price-card">
-                    <h3 class="text-xl font-semibold">Detox</h3>
-                    <div class="text-sm text-gray-500">(14 дней + сопровождение)</div>
-                    <div class="price-tag">2 700 ₽</div>
-                    <div class="text-gray-500 mb-6">27 € / $30</div>
-                    <ul class="space-y-2 flex-grow">
-                        <li class="flex items-center">
-                            <span class="green-text mr-2">✓</span>
-                            Мягкий вход в программу
-                        </li>
-                        <li class="flex items-center">
-                            <span class="green-text mr-2">✓</span>
-                            Снижение отёков
-                        </li>
-                        <li class="flex items-center">
-                            <span class="green-text mr-2">✓</span>
-                            Полное меню на 14 дней
-                        </li>
-                        <li class="flex items-center">
-                            <span class="green-text mr-2">✓</span>
-                            Ежедневная поддержка куратора
-                        </li>
-                    </ul>
-                    <a href="https://t.me/manager_alexsandra?text=Здравствуйте!%20Меня%20интересует%20тариф%20Detox." class="cta-button inline-block mt-6 text-center w-full">
-                        Выбрать
-                    </a>
-                </div>
-                
-                <div class="price-card recommended">
-                    <div class="recommended-badge">РЕКОМЕНДУЕМЫЙ</div>
-                    <h3 class="text-xl font-semibold">Slim</h3>
-                    <div class="text-sm text-gray-500">(21 день + сопровождение)</div>
-                    <div class="price-tag">3 880 ₽</div>
-                    <div class="text-gray-500 mb-6">39 € / $45</div>
-                    <ul class="space-y-2 flex-grow">
-                        <li class="flex items-center">
-                            <span class="green-text mr-2">✓</span>
-                            Полная система питания на 21 день
-                        </li>
-                        <li class="flex items-center">
-                            <span class="green-text mr-2">✓</span>
-                            Индивидуальные тренировки
-                        </li>
-                        <li class="flex items-center">
-                            <span class="green-text mr-2">✓</span>
-                            Расширенная поддержка куратора
-                        </li>
-                        <li class="flex items-center">
-                            <span class="green-text mr-2">✓</span>
-                            Доступ к закрытому чату выпускников
-                        </li>
-                    </ul>
-                    <a href="https://t.me/manager_alexsandra?text=Здравствуйте!%20Меня%20интересует%20тариф%20Slim." class="cta-button inline-block mt-6 text-center w-full">
-                        Выбрать
-                    </a>
-                </div>
-                
-                <div class="price-card">
-                    <h3 class="text-xl font-semibold">VIP-пакет Сушка</h3>
-                    <div class="text-sm text-gray-500">(30 дней + сопровождение)</div>
-                    <div class="price-tag">6 300 ₽</div>
-                    <div class="text-gray-500 mb-6">63 € / $70</div>
-                    <ul class="space-y-2 flex-grow">
-                        <li class="flex items-center">
-                            <span class="green-text mr-2">✓</span>
-                            Интенсивный формат тренировок
-                        </li>
-                        <li class="flex items-center">
-                            <span class="green-text mr-2">✓</span>
-                            Усиленная программа питания
-                        </li>
-                        <li class="flex items-center">
-                            <span class="green-text mr-2">✓</span>
-                            VIP-поддержка и персональный куратор
-                        </li>
-                        <li class="flex items-center">
-                            <span class="green-text mr-2">✓</span>
-                            Анализ прогресса каждые 3 дня
-                        </li>
-                    </ul>
-                    <a href="https://t.me/manager_alexsandra?text=Здравствуйте!%20Меня%20интересует%20тариф%20VIP-пакет%20Сушка." class="cta-button inline-block mt-6 text-center w-full">
-                        Выбрать
-                    </a>
-                </div>
-            </div>
-            
-            <div class="text-center mt-8 text-gray-600">
-                Рекомендуем пакет Slim при цели –10 кг и более
-            </div>
-        </div>
-    </section>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu md:hidden" id="mobile-menu">
+      <button class="close-menu" id="close-menu" type="button" aria-label="Закрыть меню">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="flex flex-col space-y-6 mt-12">
+        <a href="#main" class="text-xl font-medium">Главная</a>
+        <a href="#program" class="text-xl font-medium">О программе</a>
+        <a href="#pricing" class="text-xl font-medium">Тарифы</a>
+        <a href="#register" class="text-xl font-medium">Запись</a>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="section bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="section-title">Часто задаваемые вопросы</h2>
-            
-            <div class="max-w-3xl mx-auto">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Можно ли без тренировок?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        Да, программа адаптируется под ваши возможности. Можно заменить тренировки на более щадящие активности, например, ходьбу. Наша цель — создать систему, которая работает конкретно для вас.
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Можно ли с гормонами/возрастом 50+?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        Да, мы работаем с женщинами всех возрастов. Программа адаптируется под особенности вашего организма. У нас есть много успешных историй женщин старше 50 лет, в том числе с гормональными особенностями.
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Какие продукты?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        Обычные продукты, которые можно купить в любом магазине. Мы не требуем экзотических ингредиентов или дорогих суперфудов. Наше меню составлено из доступных, но полезных продуктов.
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Есть ли поддержка?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        Да, мы обеспечиваем поддержку каждый день. У вас будет доступ к куратору, который ответит на ваши вопросы, проведет мотивационные сессии и поможет справиться с трудностями.
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Подходит ли при болях в спине/ногах?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        Программа адаптируется под ваши физические особенности. При наличии проблем со спиной или суставами мы предложим альтернативные упражнения, которые не вызовут дискомфорт или боль.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- Мобильная CTA (видна в меню, но реальная постоянная CTA — снизу sticky) -->
+        <a href="https://payform.ru/k88rFUM/" class="cta-button text-center mt-4">
+          <i class="fas fa-credit-card"></i>Хочу с вами
+        </a>
+      </div>
+    </div>
+  </header>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="section">
-        <div class="container mx-auto px-4">
-            <h2 class="section-title">Отзывы участниц</h2>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
-                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Татьяна Волкова" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h3 class="font-semibold">Татьяна Волкова</h3>
-                            <div class="text-gray-500">52 года</div>
-                            <div class="pink-text font-bold">-8 кг</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-600">
-                        "Никогда не думала, что в моем возрасте можно так легко сбросить вес! Удивительно, но я не чувствовала голода и не мучилась от жестких ограничений. Спасибо за такую замечательную программу!"
-                    </p>
-                </div>
-                
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
-                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Ольга Смирнова" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h3 class="font-semibold">Ольга Смирнова</h3>
-                            <div class="text-gray-500">41 год</div>
-                            <div class="pink-text font-bold">-11 кг</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-600">
-                        "После рождения второго ребенка я никак не могла вернуться к прежней форме. Марафон Slim21 стал для меня настоящим спасением. Теперь я чувствую себя лучше, чем до беременности!"
-                    </p>
-                </div>
-                
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Елена Иванова" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h3 class="font-semibold">Елена Иванова</h3>
-                            <div class="text-gray-500">38 лет</div>
-                            <div class="pink-text font-bold">-14 кг</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-600">
-                        "Перепробовала множество диет, но всегда срывалась. С Slim21 впервые удалось пройти программу до конца и сохранить результат. Поддержка куратора оказалась тем, чего мне не хватало раньше!"
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Hero -->
+  <section id="main" class="pt-28 md:pt-32 pb-16 md:pb-20">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-10">
+        <div class="md:w-1/2">
+          <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+            Похудей до <span class="pink-text">–10 кг</span> за 21 день — <span class="green-text">без диет</span>, срывов и изнурительных тренировок
+          </h1>
 
-    <!-- Registration Section -->
-    <section id="register" class="section bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="section-title">Записаться сейчас</h2>
-            
-            <div class="max-w-lg mx-auto text-center">
-                <p class="mb-8">Для записи на марафон вам нужно написать менеджеру Александре в Telegram</p>
-                
-                <a href="https://t.me/manager_alexsandra?text=Здравствуйте!%20Меня%20интересует%20участие%20в%20марафоне%20стройности." class="btn-telegram py-4 px-8 rounded-full text-lg font-bold inline-block">
-                    <i class="fab fa-telegram-plane mr-2"></i>
-                    Записаться на марафон / Написать Александре
-                </a>
-                
-                <p class="mt-4 text-red-500 font-semibold">Места ограничены</p>
-            </div>
-        </div>
-    </section>
+          <p class="text-lg text-gray-600 mb-8">
+            Сбалансированная система питания, поддержка, чат и проверенная программа
+          </p>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-8 md:mb-0">
-                    <div class="text-2xl font-bold mb-4">
-                        <span class="pink-text">Slim</span><span class="green-text">21</span>
-                    </div>
-                    <p>© 2025 Марафон похудения Slim21. Все права защищены.</p>
-                    <p class="mt-2">Самозанятый: Деженина Елена Егоровна</p>
-                    <p>ИНН: 5606022142004</p>
-                </div>
-                
+          <div class="flex flex-col sm:flex-row flex-wrap gap-4 mb-8">
+            <div class="stat-box">
+              <div class="pink-text text-3xl font-extrabold">20K+</div>
+              <div class="text-sm text-gray-500">участниц</div>
+            </div>
+            <div class="stat-box">
+              <div class="green-text text-3xl font-extrabold">97%</div>
+              <div class="text-sm text-gray-500">сохраняют результат</div>
+            </div>
+          </div>
+
+          <!-- Кнопка -> оплата -->
+          <a href="https://payform.ru/k88rFUM/" class="cta-button inline-flex">
+            <i class="fas fa-credit-card"></i>Записаться на марафон
+          </a>
+        </div>
+
+        <div class="md:w-1/2 w-full">
+          <div class="rounded-lg overflow-hidden shadow-xl">
+            <img
+              src="https://page.gensparksite.com/v1/base64_upload/a52c1234f5f8a39f4562b47f08ac1c25"
+              alt="До и После"
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Program -->
+  <section id="program" class="section bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="section-title">О программе</h2>
+
+      <div class="flex flex-col md:flex-row items-center justify-between gap-10">
+        <div class="md:w-1/2">
+          <p class="text-lg mb-6">
+            Программа для женщин любого возраста, без жёстких ограничений. Тренировки под уровень, питание — по доступным продуктам. Всё онлайн, поддержка каждый день.
+          </p>
+
+          <div class="bg-white rounded-lg p-6 shadow-md">
+            <h3 class="text-xl font-bold mb-4">Подходит вам, если...</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <span class="green-text text-xl">✓</span>
                 <div>
-                    <div class="flex space-x-4 mb-4">
-                        <a href="#" class="hover:text-pink-400 transition-colors">
-                            <i class="fab fa-instagram text-2xl"></i>
-                        </a>
-                        <a href="#" class="hover:text-pink-400 transition-colors">
-                            <i class="fab fa-facebook text-2xl"></i>
-                        </a>
-                        <a href="#" class="hover:text-pink-400 transition-colors">
-                            <i class="fab fa-vk text-2xl"></i>
-                        </a>
-                        <a href="https://t.me/manager_alexsandra" class="hover:text-pink-400 transition-colors">
-                            <i class="fab fa-telegram-plane text-2xl"></i>
-                        </a>
-                    </div>
-                    
-                    <div>
-                        <p>Телефон: <a href="tel:89160898677" class="hover:text-pink-400">89160898677</a></p>
-                        <p>Почта: <a href="mailto:info@marafonstroynosti.online" class="hover:text-pink-400">info@marafonstroynosti.online</a></p>
-                    </div>
+                  <strong>Вес стоит или растёт</strong>
+                  <p class="text-gray-600">Диеты не работают, а вес не уходит или продолжает расти</p>
                 </div>
-            </div>
-        </div>
-    </footer>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="green-text text-xl">✓</span>
+                <div>
+                  <strong>Часто срываетесь</strong>
+                  <p class="text-gray-600">Начинаете с энтузиазмом, но быстро теряете мотивацию</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="green-text text-xl">✓</span>
+                <div>
+                  <strong>Нет сил и энергии</strong>
+                  <p class="text-gray-600">Постоянная усталость, нет энергии на активную жизнь</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="green-text text-xl">✓</span>
+                <div>
+                  <strong>Нужно сопровождение</strong>
+                  <p class="text-gray-600">С поддержкой результат получается быстрее и легче</p>
+                </div>
+              </li>
+            </ul>
+          </div>
 
-    <script>
-        // Mobile menu toggle
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const closeMenu = document.getElementById('close-menu');
-        
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
+          <a href="https://payform.ru/k88rFUM/" class="cta-button inline-flex mt-8">
+            <i class="fas fa-credit-card"></i>Хочу с вами
+          </a>
+        </div>
+
+        <div class="md:w-5/12 w-full">
+          <div class="rounded-lg overflow-hidden shadow-xl">
+            <img
+              src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+              alt="Здоровая пища"
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="grid grid-cols-3 gap-3 mt-6">
+            <div class="text-center bg-white rounded-xl p-4 shadow-sm">
+              <div class="green-text text-2xl font-extrabold">97%</div>
+              <div class="text-xs text-gray-600">сохраняют результат</div>
+            </div>
+            <div class="text-center bg-white rounded-xl p-4 shadow-sm">
+              <div class="pink-text text-2xl font-extrabold">21</div>
+              <div class="text-xs text-gray-600">день программы</div>
+            </div>
+            <div class="text-center bg-white rounded-xl p-4 shadow-sm">
+              <div class="green-text text-2xl font-extrabold">24/7</div>
+              <div class="text-xs text-gray-600">поддержка</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="section">
+    <div class="container mx-auto px-4">
+      <h2 class="section-title">Что входит в марафон</h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="feature-card">
+          <div class="text-4xl pink-text mb-4">💬</div>
+          <h3 class="text-xl font-bold mb-2">Меню по дням</h3>
+          <p class="text-gray-600">Детальное расписание питания на каждый день</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="text-4xl pink-text mb-4">🥗</div>
+          <h3 class="text-xl font-bold mb-2">Рецепты</h3>
+          <p class="text-gray-600">Простые блюда из доступных продуктов</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="text-4xl pink-text mb-4">🏋️‍♀️</div>
+          <h3 class="text-xl font-bold mb-2">Тренировки</h3>
+          <p class="text-gray-600">Занятия дома под любой уровень</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="text-4xl pink-text mb-4">👩‍💻</div>
+          <h3 class="text-xl font-bold mb-2">Поддержка</h3>
+          <p class="text-gray-600">Сопровождение на протяжении марафона</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="text-4xl pink-text mb-4">🧠</div>
+          <h3 class="text-xl font-bold mb-2">Мотивация</h3>
+          <p class="text-gray-600">Разборы ошибок и поддержка привычек</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="text-4xl pink-text mb-4">📸</div>
+          <h3 class="text-xl font-bold mb-2">Чат</h3>
+          <p class="text-gray-600">Фотоотчёты и общение с участницами</p>
+        </div>
+      </div>
+
+      <div class="text-center mt-10">
+        <a href="https://payform.ru/k88rFUM/" class="cta-button inline-flex">
+          <i class="fas fa-credit-card"></i>Хочу с вами
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section id="results" class="section bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="section-title">Результаты участниц</h2>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-10">
+        <div class="testimonial-card">
+          <img src="https://page.gensparksite.com/v1/base64_upload/34103183d460b113251e3efc6ca4dd93" alt="Результат Марии" class="w-full h-auto" loading="lazy">
+          <div class="p-6">
+            <h3 class="text-xl font-bold">Мария, 42 лет</h3>
+            <div class="pink-text font-extrabold mb-2">Минус 12 кг</div>
+            <p class="text-gray-600">"Я не верила, что можно похудеть без голода и срывов!"</p>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <img src="https://page.gensparksite.com/v1/base64_upload/7ba98fd939ca2f89bc8a731e29de375e" alt="Результат Натальи" class="w-full h-auto" loading="lazy">
+          <div class="p-6">
+            <h3 class="text-xl font-bold">Наталья, 45 лет</h3>
+            <div class="pink-text font-extrabold mb-2">Минус 15 кг</div>
+            <p class="text-gray-600">"Изменила отношение к питанию. Результат держится!"</p>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <img src="https://page.gensparksite.com/v1/base64_upload/4a8bea8a48ac546a9d5d9ff2c7a9890c" alt="Результат Екатерины" class="w-full h-auto" loading="lazy">
+          <div class="p-6">
+            <h3 class="text-xl font-bold">Екатерина, 35 лет</h3>
+            <div class="pink-text font-extrabold mb-2">Минус 8 кг</div>
+            <p class="text-gray-600">"Спасибо за поддержку и отличную программу!"</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <div class="text-lg md:text-xl mb-6">С нами уже похудели более 20 000 женщин</div>
+        <a href="https://payform.ru/k88rFUM/" class="cta-button inline-flex">
+          <i class="fas fa-credit-card"></i>Хочу такие же результаты
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="section">
+    <div class="container mx-auto px-4">
+      <h2 class="section-title">Пакеты участия и цены</h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="price-card">
+          <h3 class="text-xl font-bold">Пробный марафон</h3>
+          <div class="text-sm text-gray-500">(10 дней)</div>
+          <div class="price-tag">300 ₽</div>
+          <div class="text-gray-500 mb-6">6 € / $7</div>
+          <ul class="space-y-2 flex-grow">
+            <li class="flex items-center gap-2"><span class="green-text">✓</span>Пример меню</li>
+            <li class="flex items-center gap-2"><span class="green-text">✓</span>Поддержка</li>
+            <li class="flex items-center gap-2"><span class="green-text">✓</span>Чат</li>
+          </ul>
+          <a href="https://payform.ru/k88rFUM/" class="cta-button mt-6 w-full">
+            <i class="fas fa-credit-card"></i>Выбрать
+          </a>
+        </div>
+
+        <div class="price-card">
+          <h3 class="text-xl font-bold">Detox</h3>
+          <div class="text-sm text-gray-500">(14 дней + сопровождение)</div>
+          <div class="price-tag">2 700 ₽</div>
+          <div class="text-gray-500 mb-6">27 € / $30</div>
+          <ul class="space-y-2 flex-grow">
+            <li class="flex items-center gap-2"><span class="green-text">✓</span>Мягкий вход</li>
+            <li class="flex items-center gap-2"><span class="green-text">✓</span>Снижение отёков</li>
+            <li class="flex items-center gap-2"><span class="green-text">✓</span>Меню на 14 дней</li>
+            <li class="flex items-center gap-2"><span class="green-text">✓</span>Ежедневная поддержка</li>
+          </ul>
+          <a href="https://payform.ru/k88rFUM/" class="cta-button mt-6 w-full">
+            <i class="fas fa-credit-card"></i>Выбрать
+          </a>
+        </div>
+
+        <div class="price-card recommended">
+          <div class="recommended-badge">РЕКОМЕНДУЕМЫЙ</div>
+          <h3 class="text-xl font-bold">Slim</h3>
+          <div class="text-sm text-gray-500">(21 день + сопровождение)</div>
+          <div class="price-tag">3 880 ₽</div>
+          <div class="text-gray-500 mb-6">39 € / $45</div>
+          <ul class="space-y-2 flex-grow">
+            <li class="flex items-center gap-2"><span class="green-text">✓</span>Питание на 21 день</li>
+            <li class="flex items-center gap-2"><span class="green-text">✓</span>Тренировки</li>
+            <li class="flex items-center gap-2"><span class="green-text">✓</span>Расширенная поддержка</li>
+            <li class="flex items-center gap-2"><span class="green-text">✓</span>Закрытый чат</li>
+          </ul>
+          <a href="https://payform.ru/k88rFUM/" class="cta-button mt-6 w-full">
+            <i class="fas fa-credit-card"></i>Выбрать
+          </a>
+        </div>
+
+        <div class="price-card">
+          <h3 class="text-xl font-bold wrap-anywhere">VIP-пакет Сушка</h3>
+          <div class="text-sm text-gray-500">(30 дней + сопровождение)</div>
+          <div class="price-tag">6 300 ₽</div>
+          <div class="text-gray-500 mb-6">63 € / $70</div>
+          <ul class="space-y-2 flex-grow">
+            <li class="flex items-center gap-2"><span class="green-text">✓</span>Интенсивные тренировки</li>
+            <li class="flex items-center gap-2"><span class="green-text">✓</span>Усиленное питание</li>
+            <li class="flex items-center gap-2"><span class="green-text">✓</span>VIP-поддержка</li>
+            <li class="flex items-center gap-2"><span class="green-text">✓</span>Анализ прогресса</li>
+          </ul>
+          <a href="https://payform.ru/k88rFUM/" class="cta-button mt-6 w-full">
+            <i class="fas fa-credit-card"></i>Выбрать
+          </a>
+        </div>
+      </div>
+
+      <div class="text-center mt-8 text-gray-600">
+        Рекомендуем пакет Slim при цели –10 кг и более
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="section-title">Часто задаваемые вопросы</h2>
+
+      <div class="max-w-3xl mx-auto bg-white rounded-2xl p-6 shadow-sm">
+        <div class="faq-item">
+          <div class="faq-question">
+            Можно ли без тренировок?
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Да. Можно заменить тренировки на щадящую активность (например, ходьбу).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Можно ли с гормонами/возрастом 50+?
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Да, программа адаптируется под особенности организма и уровень активности.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Какие продукты?
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Обычные продукты из магазина. Без экзотики и дорогих ингредиентов.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Есть ли поддержка?
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Да, поддержка каждый день + чат.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Подходит ли при болях в спине/ногах?
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Подберём альтернативные упражнения, чтобы было комфортно и безопасно.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="section">
+    <div class="container mx-auto px-4">
+      <h2 class="section-title">Отзывы участниц</h2>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow-md h-full">
+          <div class="flex items-center mb-4 gap-4">
+            <div class="w-14 h-14 rounded-full overflow-hidden">
+              <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Татьяна Волкова" class="w-full h-full object-cover" loading="lazy">
+            </div>
+            <div>
+              <h3 class="font-bold">Татьяна Волкова</h3>
+              <div class="text-gray-500 text-sm">52 года</div>
+              <div class="pink-text font-extrabold">-8 кг</div>
+            </div>
+          </div>
+          <p class="text-gray-600">"Никогда не думала, что можно так легко сбросить вес!"</p>
+          <a href="https://payform.ru/k88rFUM/" class="cta-button mt-5 w-full">
+            <i class="fas fa-credit-card"></i>Хочу с вами
+          </a>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-md h-full">
+          <div class="flex items-center mb-4 gap-4">
+            <div class="w-14 h-14 rounded-full overflow-hidden">
+              <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Ольга Смирнова" class="w-full h-full object-cover" loading="lazy">
+            </div>
+            <div>
+              <h3 class="font-bold">Ольга Смирнова</h3>
+              <div class="text-gray-500 text-sm">41 год</div>
+              <div class="pink-text font-extrabold">-11 кг</div>
+            </div>
+          </div>
+          <p class="text-gray-600">"Марафон стал настоящим спасением!"</p>
+          <a href="https://payform.ru/k88rFUM/" class="cta-button mt-5 w-full">
+            <i class="fas fa-credit-card"></i>Хочу с вами
+          </a>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-md h-full">
+          <div class="flex items-center mb-4 gap-4">
+            <div class="w-14 h-14 rounded-full overflow-hidden">
+              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Елена Иванова" class="w-full h-full object-cover" loading="lazy">
+            </div>
+            <div>
+              <h3 class="font-bold">Елена Иванова</h3>
+              <div class="text-gray-500 text-sm">38 лет</div>
+              <div class="pink-text font-extrabold">-14 кг</div>
+            </div>
+          </div>
+          <p class="text-gray-600">"Впервые прошла программу до конца и сохранила результат."</p>
+          <a href="https://payform.ru/k88rFUM/" class="cta-button mt-5 w-full">
+            <i class="fas fa-credit-card"></i>Хочу с вами
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Register -->
+  <section id="register" class="section bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="section-title">Записаться сейчас</h2>
+
+      <div class="max-w-lg mx-auto text-center bg-white rounded-2xl p-6 shadow-sm">
+        <p class="mb-6 text-gray-700">Нажмите кнопку ниже, чтобы перейти к оплате</p>
+
+        <!-- По стилю Telegram, но ведет на оплату -->
+        <a href="https://payform.ru/k88rFUM/" class="cta-button w-full" style="background:#0088cc;">
+          <i class="fab fa-telegram-plane"></i>Записаться / Связаться
+        </a>
+
+        <p class="mt-4 text-red-500 font-bold">Места ограничены</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
+        <div class="min-w-0">
+          <div class="text-2xl font-extrabold mb-3">
+            <a href="https://payform.ru/k88rFUM/" class="inline-block">
+              <span class="pink-text">Slim</span><span class="green-text">21</span>
+            </a>
+          </div>
+          <p>© 2025 Марафон похудения Slim21. Все права защищены.</p>
+          <p class="mt-2">Самозанятый: Деженина Елена Егоровна</p>
+          <p>ИНН: 5606022142004</p>
+        </div>
+
+        <div class="min-w-0">
+          <div class="flex space-x-4 mb-4">
+            <!-- Иконки -> оплата -->
+            <a href="https://payform.ru/k88rFUM/" class="hover:text-pink-400 transition-colors" aria-label="Instagram">
+              <i class="fab fa-instagram text-2xl"></i>
+            </a>
+            <a href="https://payform.ru/k88rFUM/" class="hover:text-pink-400 transition-colors" aria-label="Facebook">
+              <i class="fab fa-facebook text-2xl"></i>
+            </a>
+            <a href="https://payform.ru/k88rFUM/" class="hover:text-pink-400 transition-colors" aria-label="VK">
+              <i class="fab fa-vk text-2xl"></i>
+            </a>
+            <a href="https://payform.ru/k88rFUM/" class="hover:text-pink-400 transition-colors" aria-label="Telegram">
+              <i class="fab fa-telegram-plane text-2xl"></i>
+            </a>
+          </div>
+
+          <div class="text-sm text-gray-200">
+            <p>Телефон: <a href="https://payform.ru/k88rFUM/" class="hover:text-pink-400">89160898677</a></p>
+            <p>Почта: <a href="https://payform.ru/k88rFUM/" class="hover:text-pink-400 wrap-anywhere">info@marafonstroynosti.online</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky bottom CTA (всегда видно на мобилке) -->
+  <div class="sticky-cta md:hidden">
+    <a class="btn" href="https://payform.ru/k88rFUM/">
+      <i class="fas fa-credit-card"></i>Хочу с вами
+    </a>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMenu = document.getElementById('close-menu');
+
+    menuToggle.addEventListener('click', () => mobileMenu.classList.add('active'));
+    closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const a = q.nextElementSibling;
+        a.classList.toggle('active');
+        const icon = q.querySelector('i');
+        if (!icon) return;
+        icon.classList.toggle('fa-chevron-down');
+        icon.classList.toggle('fa-chevron-up');
+      });
+    });
+
+    // Smooth scrolling only for anchors (#...)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const id = this.getAttribute('href');
+        if (!id || id === '#') return;
+        const el = document.querySelector(id);
+        if (!el) return;
+
+        window.scrollTo({
+          top: el.offsetTop - 80,
+          behavior: 'smooth'
         });
-        
-        closeMenu.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-        });
-        
-        // FAQ accordion
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                answer.classList.toggle('active');
-                
-                const icon = question.querySelector('i');
-                if (answer.classList.contains('active')) {
-                    icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
-                } else {
-                    icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
-                }
-            });
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (!targetElement) return;
-                
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-                
-                // Close mobile menu if open
-                mobileMenu.classList.remove('active');
-            });
-        });
-    </script>
+
+        mobileMenu.classList.remove('active');
+      });
+    });
+
+    // Гарантия: все не-якорные ссылки -> оплата
+    (function forceAllLinksToPay(){
+      const payUrl = "https://payform.ru/k88rFUM/";
+      document.querySelectorAll('a').forEach(a => {
+        const href = (a.getAttribute('href') || '').trim();
+        if (!href) { a.setAttribute('href', payUrl); return; }
+        if (href.startsWith('#')) return; // якоря оставляем
+        a.setAttribute('href', payUrl);
+        a.removeAttribute('target');
+        a.removeAttribute('rel');
+      });
+    })();
+  </script>
 </body>
 </html>
+
